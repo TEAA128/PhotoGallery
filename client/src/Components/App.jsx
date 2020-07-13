@@ -47,7 +47,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3004/api/51/photogallery',
+      url: 'http://localhost:3004/api/90/photogallery',
       success: (data) => {
         this.setState({ photos: data });
       },

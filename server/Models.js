@@ -27,6 +27,26 @@ function updateSaveToList(roomId, id, listName, savedStatus, callback) {
     }, callback);
 }
 
+// create room
+function createRoom(userId, roomId, roomPhotos, saveStatus, callback) {
+  Gallery.create ({
+    user_id: userId,
+    room_id: roomId,
+    room_photos: roomPhotos,
+    save_status: [],
+ }, callback);
+}
+
+// update room
+function updateRoom(userId, roomId, roomPhotos, saveStatus, callback) {
+  Gallery.update ()
+}
+
+// delete room
+function removeRoom (roomId, callback) {
+  Gallery.deleteOne({ room_id: roomId }, callback);
+}
+
 module.exports = {
-  getPhotos, postSaveToList, updateSaveToList,
+  getPhotos, postSaveToList, updateSaveToList, removeRoom,
 };
