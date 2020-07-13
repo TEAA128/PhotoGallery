@@ -24,4 +24,20 @@ app.put('/api/:roomId/photogallery', (req, res) => {
   Controllers.updateSaveToList(req, res);
 });
 
+// create room
+app.post('/api/:roomId/photogallery', (req, res) => {
+  Controllers.createRoom(req, res);
+});
+
+// update room
+app.put('/api/:roomId/photogallery', (req, res) => {
+  Controllers.updateRoom(req, res);
+});
+
+// delete room
+app.delete('/api/:roomId/photogallery', (req, res) => {
+  Controllers.removeRoom(req, res);
+});
+
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
