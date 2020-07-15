@@ -63,6 +63,9 @@ const startWriting = (writeStream, encoding, dataFunction, done) => {
     let canWrite = true;
     do {
       let data = dataFunction(i);
+      if( i % 1000000) {
+        console.log('');
+      }
       i += 1;
       // check if i === 0 so we would write and call `done`
       if (i === finish) {
