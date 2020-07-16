@@ -26,7 +26,7 @@ const photosByRoom = (roomId) => {
     str += `${room_id},${photo_order},${title},${address},${image_url},${image_description}\n`;
   }
 
-  return str;
+  return `${str}`;
 };
 
 const listByUser = (userId) => {
@@ -34,16 +34,16 @@ const listByUser = (userId) => {
   const randomNumRoom = Math.floor(Math.random() * 8);
   const user_id = userId;
   let str = '';
-  for (let j = 1; j < randomNumList; j +=1 ) {
+  for (let j = 1; j < randomNumList; j += 1) {
     const list_id = j;
     const list_name = faker.lorem.words();
 
-    for (let k = 1; k < randomNumRoom; k += 1 ) {
-      const room_id = Math.floor(Math.random()* 10000000) + 1;
+    for (let k = 1; k < randomNumRoom; k += 1) {
+      const room_id = Math.floor(Math.random() * 10000000) + 1;
       str += `${user_id},${list_id},${list_name},${room_id}\n`;
     }
   }
-  return str;
+  return `${str}`;
 };
 
 const startWriting = (writeStream, encoding, dataFunction, done) => {
@@ -52,14 +52,14 @@ const startWriting = (writeStream, encoding, dataFunction, done) => {
     let canWrite = true;
     do {
       let data = dataFunction(i);
-      i +=1;
+      i += 1;
       if (i === finish) {
         writeStream.write(data, encoding, done);
       } else {
         canWrite = writeStream.write(data, encoding);
       }
-    } while (i< finish && canWrite);
-    if (i < finish && canWrite) {
+    } while (i < finish && canWrite);
+    if (i < finish && !canWrite) {
       writeStream.once('drain', writing);
     }
   }

@@ -38,10 +38,10 @@ node ./cassSeed.js --output1=$FILEPATH1 --output2=$FILEPATH2 --start=$START --fi
 
 date
 ### Import Our postgres.csv file to seed Database ###
-cqlsh -e "COPY bnb.photos_by_room(room_id,photo_order,title,address,image_url,image_description) FROM '$FILEPATH1' WITH DELIMITER = ',' AND HEADER = TRUE;"
+# cqlsh -e "COPY bnb.photos_by_room(room_id,photo_order,title,address,image_url,image_description) FROM '$FILEPATH1' WITH DELIMITER = ',' AND HEADER = TRUE;"
 
-date
+# date
 
-cqlsh -e "COPY bnb.list_by_user(user_id,list_order,list_name,room_id) FROM '$FILEPATH2' WITH DELIMITER = ',' AND HEADER = TRUE;"
+# cqlsh -e "COPY bnb.list_by_user(user_id,list_order,list_name,room_id) FROM '$FILEPATH2' WITH DELIMITER = ',' AND HEADER = TRUE;"
 
-date
+# date
