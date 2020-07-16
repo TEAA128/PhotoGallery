@@ -1,33 +1,37 @@
+DROP KEYSPACE IF EXISTS bnb;
 CREATE KEYSPACE IF NOT EXISTS bnb
 WITH replication = {
   'class' : 'NetworkTopologyStrategy',
   'datacenter1' : 1
   };
 
+USE bnb;
+
 --photo order
 CREATE TABLE bnb.photos_by_room (
-  room_id uuid,
-  photo_id uuid, --time uuid
+  room_id int, --uuid?
+  photo_order int, --time uuid
   title varchar,
   address varchar,
   image_url varchar,
   image_description text,
-  PRIMARY KEY (room_id) --add photo_id
-)
+  PRIMARY KEY (room_id, photo_order) --add photo_order as composite so room_id and photo_order combo will be unique
+);
 
 CREATE TABLE bnb.list_by_user (
-  user_id uuid,
-  list_id uuid,
+  user_id int, --uuid
+  list_order int, --uuid
   list_name varchar,
-  PRIMARY KEY(user_id, list_id)
-)
+  room_id int,  --uuid
+  PRIMARY KEY(user_id, list_order) --use composite so user_id and list_id combo will be unique
+);
 
 --order by date ???
-CREATE TABLE bnb.rooms_by_list_id(
-  list_id uuid,
-  room_id uuid,
-  PRIMARY KEY(list_id)
-)
+-- CREATE TABLE bnb.rooms_by_list_id(
+--   list_id uuid,
+--   room_id uuid,
+--   PRIMARY KEY(list_id)
+-- )
 
 
 -- CREATE TYPE bnb.image (
@@ -47,7 +51,7 @@ CREATE TABLE bnb.rooms_by_list_id(
 --   last_name varchar,
 --   --saved_lists list <listName>,  lists should just be in here as names?
 --   PRIMARY KEY (user_id)
-)
+-- )
 
 --not sure if necessary since query driven. -- not necessary
 -- CREATE TABLE bnb.rooms (
