@@ -9,8 +9,8 @@ USE bnb;
 
 --photo order
 CREATE TABLE bnb.photos_by_room (
-  room_id int, --uuid?
-  photo_order int, --time uuid
+  room_id int,
+  photo_order int,
   title varchar,
   address varchar,
   image_url varchar,
@@ -19,10 +19,10 @@ CREATE TABLE bnb.photos_by_room (
 );
 
 CREATE TABLE bnb.list_by_user (
-  user_id int, --uuid
-  list_order int, --uuid
+  user_id int,
+  list_order int,
   list_name varchar,
-  room_id int,  --uuid
+  room_id int,
   PRIMARY KEY(user_id, list_order) --use composite so user_id and list_id combo will be unique
 );
 
