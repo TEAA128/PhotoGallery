@@ -29,16 +29,19 @@ const photosByRoom = (roomId) => {
   return `${str}`;
 };
 
+let listId = 1;
+
 const listByUser = (userId) => {
   const randomNumList = Math.floor(Math.random() * 5);
   const randomNumRoom = Math.floor(Math.random() * 8);
   const user_id = userId;
   let str = '';
   for (let j = 1; j < randomNumList; j += 1) {
-    const list_id = j;
     const list_name = faker.lorem.words();
 
     for (let k = 1; k < randomNumRoom; k += 1) {
+      const list_id = listId;
+      listId += 1;
       const room_id = Math.floor(Math.random() * 10000000) + 1;
       str += `${user_id},${list_id},${list_name},${room_id}\n`;
     }

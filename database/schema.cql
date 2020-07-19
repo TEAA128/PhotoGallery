@@ -16,15 +16,15 @@ CREATE TABLE bnb.photos_by_room (
   image_url varchar,
   image_description text,
   PRIMARY KEY (room_id, photo_order) --add photo_order as composite so room_id and photo_order combo will be unique
-);
+) WITH compaction = { 'class': 'org.apache.cassandra.db.compaction.LeveledCompactionStrategy'};
 
 CREATE TABLE bnb.list_by_user (
   user_id int,
-  list_order int,
+  list_id int,
   list_name varchar,
   room_id int,
-  PRIMARY KEY(user_id, list_order) --use composite so user_id and list_id combo will be unique
-);
+  PRIMARY KEY(user_id, list_id) --use composite so user_id and list_id combo will be unique
+) WITH compaction = { 'class': 'org.apache.cassandra.db.compaction.LeveledCompactionStrategy'};
 
 --order by date ???
 -- CREATE TABLE bnb.rooms_by_list_id(

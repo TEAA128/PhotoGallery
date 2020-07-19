@@ -42,6 +42,6 @@ cqlsh -e "COPY bnb.photos_by_room(room_id,photo_order,title,address,image_url,im
 
 # date
 
-cqlsh -e "COPY bnb.list_by_user(user_id,list_order,list_name,room_id) FROM '$FILEPATH2' WITH DELIMITER = ',' AND HEADER = TRUE;"
+cqlsh -e "COPY bnb.list_by_user(user_id,list_id,list_name,room_id) FROM '$FILEPATH2' WITH DELIMITER = ',' AND HEADER = TRUE;"
 
 # date
