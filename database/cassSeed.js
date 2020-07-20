@@ -17,10 +17,12 @@ const photosByRoom = (roomId) => {
   let str = '';
 
   for (let i = 1; i < randomNumPhotos; i += 1) {
+    const randomPhoto = Math.floor(Math.random() * 1000) + 1;
+
     const photo_order = i;
     const title = faker.lorem.words();
     const address = faker.address.streetAddress();
-    const image_url = faker.image.imageUrl();
+    const image_url = `https://teaa-photo-gallery-photos.s3-us-west-1.amazonaws.com/image${randomPhoto}.jpg`;
     const image_description = faker.lorem.words();
 
     str += `${room_id},${photo_order},${title},${address},${image_url},${image_description}\n`;
