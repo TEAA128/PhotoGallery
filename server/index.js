@@ -1,43 +1,60 @@
 /* eslint-disable import/newline-after-import */
 /* eslint-disable no-console */
+require('dotenv').config();
+require('newrelic');
 const express = require('express');
-const app = express();
-const port = 3004;
+const port = process.env.PORT || 3004;
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+// const morgan = require('morgan');
 const Controllers = require('./Controllers.js');
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use('/photogallery', express.static(path.join(__dirname, '../client/dist')));
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 
-app.get('/api/:roomId/photogallery', (req, res) => {
-  Controllers.getPhotos(req, res);
-});
+if (cluster.isMaster) {
+  for (let i = 0; i < numCPUs; i += 1) {
+    cluster.fork();
+  }
+} else {
+  const app = express();
+  // app.use(morgan('dev'));
+  app.use(cors());
+  app.use(bodyParser.json());
+  app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
-app.post('/api/:roomId/photogallery', (req, res) => {
-  Controllers.postSaveToList(req, res);
-});
+  app.get('/api/rooms/:roomId/', (req, res) => {
+    Controllers.getPhotos(req, res);
+  });
 
-app.put('/api/:roomId/photogallery', (req, res) => {
-  Controllers.updateSaveToList(req, res);
-});
+  app.post('/api/users/:userId/lists', (req, res) => {
+    Controllers.postSaveToList(req, res);
+  });
 
-// create room
-app.post('/api/:roomId/photogallery', (req, res) => {
-  Controllers.createRoom(req, res);
-});
+  app.put('/api/users/:userId/lists', (req, res) => {
+    Controllers.updateSaveToList(req, res);
+  });
 
-// update room
-app.put('/api/:roomId/photogallery', (req, res) => {
-  Controllers.updateRoom(req, res);
-});
+  app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+}
 
-// delete room
-app.delete('/api/:roomId/photogallery', (req, res) => {
-  Controllers.removeRoom(req, res);
-});
+// cluster.on('exit', function(worker, code, signal) {
+//   console.log('Worker %d died with code/signal %s. Restarting worker...', worker.process.pid, signal || code);
+//   cluster.fork();
+// });
 
+// // create room
+// app.post('/api/rooms', (req, res) => {
+//   Controllers.createRoom(req, res);
+// });
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+// // update room
+// app.put('/api/rooms/:roomId', (req, res) => {
+//   Controllers.updateRoom(req, res);
+// });
+
+// // delete room
+// app.delete('/api/rooms/:roomId', (req, res) => {
+//   Controllers.removeRoom(req, res);
+// });
