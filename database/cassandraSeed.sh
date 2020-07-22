@@ -29,8 +29,9 @@ FINISH=${2:-21}
 #cqlsh -u 'my_username' -p 'my_password' -f /mydir/myfile.cql
 #source 'user_schema.cql'
 
-SCHEMA="$DIR/schema.cql"
-cqlsh -f $SCHEMA
+###use this when making first CVS file###
+# SCHEMA="$DIR/schema.cql"
+# cqlsh -f $SCHEMA
 
 date
 ### Run Our Generator Script ###

@@ -14,6 +14,7 @@ const stream2 = fs.createWriteStream(filename2);
 const photosByRoom = (roomId) => {
   const randomNumPhotos = Math.floor(Math.random() * 17);
   const room_id = roomId;
+  const address = faker.address.streetAddress();
   let str = '';
 
   for (let i = 1; i < randomNumPhotos; i += 1) {
@@ -21,7 +22,6 @@ const photosByRoom = (roomId) => {
 
     const photo_order = i;
     const title = faker.lorem.words();
-    const address = faker.address.streetAddress();
     const image_url = `https://teaa-photo-gallery-photos.s3-us-west-1.amazonaws.com/image${randomPhoto}.jpg`;
     const image_description = faker.lorem.words();
 
@@ -31,7 +31,7 @@ const photosByRoom = (roomId) => {
   return `${str}`;
 };
 
-let listId = 1;
+// let listId = 28383284; change this when making CSVs
 
 const listByUser = (userId) => {
   const randomNumList = Math.floor(Math.random() * 5);

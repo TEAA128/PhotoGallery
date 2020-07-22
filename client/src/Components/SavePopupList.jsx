@@ -44,7 +44,7 @@ class SavePopupList extends React.Component {
 
   render() {
     const { showForm } = this.state;
-    const { saveToList, photos, likeStatusUpdate } = this.props;
+    const { saveToList, saveStatus, likeStatusUpdate } = this.props;
 
     let form;
     if (showForm) {
@@ -69,7 +69,7 @@ class SavePopupList extends React.Component {
           <div className={styles.shareContentContainer}>
             <table>
               <tbody>
-                {photos.save_status.map((item, index) => <SavePopupListItem item={item} key={index} likeStatusUpdate={likeStatusUpdate} />)}
+                {saveStatus.map((item, index) => <SavePopupListItem item={item} key={index} likeStatusUpdate={likeStatusUpdate} />)}
               </tbody>
             </table>
           </div>

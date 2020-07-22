@@ -1,3 +1,9 @@
 node_modules
 client/dist/bundle.js
 *.csv
+.env
+newrelic_agent.log
+newrelic.js
+server/k6script.js
+bundle.js.br
+bundle.js.gz

@@ -20,6 +20,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       photos: [],
+      saveStatus:[],
       view: 'main',
       showSharePopup: false,
       clickedPhotoIdx: -1,
@@ -47,7 +48,7 @@ class App extends React.Component {
 
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3004/api/90/photogallery',
+      url: 'http://localhost:3004/api/rooms/2',
       success: (data) => {
         this.setState({ photos: data });
       },
@@ -188,14 +189,14 @@ class App extends React.Component {
     const list = photos;
 
     if (list.length !== 0) {
-      for (let i = 0; i < 5; i += 1) {
-        mainPhoto.push(list[0].room_photos[i]);
+      for (let i = 0; i < list.length; i += 1) {
+        mainPhoto.push(list[i]);
       }
       if (clickedPhotoIdx >= 0) {
-        return <GalleryDetail photos={photos[0]} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} clickedPhotoIdx={clickedPhotoIdx} saveToList={this.saveToList} likeStatusUpdate={this.likeStatusUpdate} />;
+        return <GalleryDetail photos={photos} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} clickedPhotoIdx={clickedPhotoIdx} saveToList={this.saveToList} likeStatusUpdate={this.likeStatusUpdate} />;
       } if (view === 'main') {
         if (mainView === 'main') {
-          return <GalleryMain photos={photos[0]} onShowAll={this.onShowAll} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} getClickedPhotoIdx={this.getClickedPhotoIdx} />;
+          return <GalleryMain photos={photos} onShowAll={this.onShowAll} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} getClickedPhotoIdx={this.getClickedPhotoIdx} />;
         } else {
           return <GalleryMainGrid photos={photos[0]} showDetailGrid={this.showDetailGrid} numPhotos={photos[0].room_photos.length} />;
         }
@@ -203,7 +204,7 @@ class App extends React.Component {
         if (detailView === 'grid') {
           return <GalleryDetailGrid photos={photos[0]} onExitDetail={this.onExitDetail} getClickedPhotoIdxfromGrid={this.getClickedPhotoIdxfromGrid} />;
         } else if (detailView === 'non-grid') {
-          return <GalleryDetail photos={photos[0]} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} saveToList={this.saveToList} likeStatusUpdate={this.likeStatusUpdate} />;
+          return <GalleryDetail photos={photos} onExitDetail={this.onExitDetail} sharePopupHandler={this.sharePopupHandler} saveToList={this.saveToList} likeStatusUpdate={this.likeStatusUpdate} />;
         }
       }
     }
