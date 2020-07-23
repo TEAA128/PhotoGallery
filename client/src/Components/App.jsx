@@ -14,6 +14,8 @@ import SharePopupInner from './SharePopupInner.jsx';
 import GalleryDetailGrid from './GalleryDetailGrid.jsx';
 import GalleryMainGrid from './GalleryMainGrid.jsx';
 import styles from '../styles/App.css';
+const localhost = process.env.LOCALHOST || 'localhost';
+const port = process.env.PORT || 3004;
 
 class App extends React.Component {
   constructor(props) {
@@ -45,10 +47,10 @@ class App extends React.Component {
   componentDidMount() {
     window.addEventListener('resize', this.changeViewOnWindowSize);
     window.addEventListener('resize', this.changeMainViewOnWindowSize);
-
+    console.log(localhost);
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3004/api/rooms/2',
+      url: `http://${localhost}:${port}/api/rooms/2`,
       success: (data) => {
         this.setState({ photos: data });
       },

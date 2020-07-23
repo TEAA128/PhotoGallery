@@ -4,6 +4,7 @@ require('dotenv').config();
 require('newrelic');
 const express = require('express');
 const port = process.env.PORT || 3004;
+const localhost = process.env.LOCALHOST || 'localhost';
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
@@ -36,7 +37,7 @@ if (cluster.isMaster) {
     Controllers.updateSaveToList(req, res);
   });
 
-  app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+  app.listen(port, () => console.log(`Example app listening at http://${localhost}:${port}`));
 }
 
 // cluster.on('exit', function(worker, code, signal) {
