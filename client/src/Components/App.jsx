@@ -14,8 +14,8 @@ import SharePopupInner from './SharePopupInner.jsx';
 import GalleryDetailGrid from './GalleryDetailGrid.jsx';
 import GalleryMainGrid from './GalleryMainGrid.jsx';
 import styles from '../styles/App.css';
-const localhost = process.env.LOCALHOST || 'localhost';
-const port = process.env.PORT || 3004;
+const localhost = 'ec2-52-53-165-116.us-west-1.compute.amazonaws.com';
+const port = 3004;
 
 class App extends React.Component {
   constructor(props) {
